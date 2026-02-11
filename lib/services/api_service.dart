@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import '../models/board.dart';
 
 /// Servizio responsabile di tutte le chiamate di rete (HTTP).
 /// Utilizza il pacchetto [dio] che è molto potente per gestire le API.
@@ -12,7 +13,7 @@ class ApiService {
   final Dio _dio = Dio(BaseOptions(baseUrl: _baseUrl));
 
   /// Recupera la lista di tutte le tavole da surf disponibili.
-  Future<List<Map<String, dynamic>>> getBoards() async {
+  Future<List<Board>> getBoards() async {
     try {
       final response = await _dio.get('/Exam1');
 
@@ -21,55 +22,14 @@ class ApiService {
         final List<dynamic> data = response.data;
         if (data.isNotEmpty && data[0]['boards'] != null) {
           final List<dynamic> boards = data[0]['boards'];
-          return boards.cast<Map<String, dynamic>>();
+          // Convertiamo ogni ogni Map<String, dynamic> in un oggetto Board 
+          return boards.map((json) => Board.fromJson(json)).toList();
         }
         return [];
       }
       return [];
     } catch (e) {
       debugPrint('Errore getBoards: $e');
-      return [];
-    }
-  }
-
-  /// Recupera la lista di tutti i piatti del menu.
-  Future<List<Map<String, dynamic>>> getMenu() async {
-    try {
-      final response = await _dio.get('/Exam1');
-
-      if (response.statusCode == 200) {
-        // L'API restituisce un array con un oggetto che contiene la chiave "menu"
-        final List<dynamic> data = response.data;
-        if (data.isNotEmpty && data[0]['menu'] != null) {
-          final List<dynamic> menu = data[0]['menu'];
-          return menu.cast<Map<String, dynamic>>();
-        }
-        return [];
-      }
-      return [];
-    } catch (e) {
-      debugPrint('Errore getMenu: $e');
-      return [];
-    }
-  }
-
-  /// Recupera la lista di tutte le stanze disponibili.
-  Future<List<Map<String, dynamic>>> getRooms() async {
-    try {
-      final response = await _dio.get('/Exam1');
-
-      if (response.statusCode == 200) {
-        // L'API restituisce un array con un oggetto che contiene la chiave "rooms"
-        final List<dynamic> data = response.data;
-        if (data.isNotEmpty && data[0]['rooms'] != null) {
-          final List<dynamic> rooms = data[0]['rooms'];
-          return rooms.cast<Map<String, dynamic>>();
-        }
-        return [];
-      }
-      return [];
-    } catch (e) {
-      debugPrint('Errore getRooms: $e');
       return [];
     }
   }
