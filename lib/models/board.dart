@@ -2,9 +2,25 @@ class Board {
   // TODO: Aggiungi qui le variabili della classe
   // Suggerimento: guarda la struttura JSON nel README.md
 
-  Board() {
-    // TODO: Inizializza le variabili della classe usando i parametri del costruttore
-  }
+  Board({
+    required this.id,
+    required this.modello,
+    required this.marca,
+    required this.prezzo,
+    required this.lunghezza,
+    required this.volume,
+    required this.disponibile,
+    required this.urlImmagine,
+  });
+
+  final int id;
+  final String modello;
+  final String marca;
+  final double prezzo;
+  final int lunghezza;
+  final int volume;
+  final bool disponibile;
+  final String urlImmagine;
 
   factory Board.fromJson(Map<String, dynamic> json) {
     return Board(
