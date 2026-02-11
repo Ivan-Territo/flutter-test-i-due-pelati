@@ -17,8 +17,8 @@ class Board {
   final String modello;
   final String marca;
   final double prezzo;
-  final int lunghezza;
-  final int volume;
+  final String lunghezza;
+  final String volume;
   final bool disponibile;
   final String urlImmagine;
 
