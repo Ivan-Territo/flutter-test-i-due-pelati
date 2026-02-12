@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_login_profile_lesson/pages/hero_section_page.dart';
 import '../models/board.dart';
 import '../services/api_service.dart';
 import 'navigation_page.dart';
+import 'hero_section_page.dart';
+import 'footer_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -28,11 +29,24 @@ class _HomePageState extends State<HomePage> {
       //appBar: AppBar(),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
-          : Column(
+          : SingleChildScrollView(
+            child: Column(
               children: [
                 NavigationBarCustom(),
                 HeroSection(),
-                Expanded(
+                SizedBox(height: 24),
+                Center(
+                  child: Text(
+                    'Choose your surfboard',
+                    style: TextStyle(
+                      color: Colors.grey.shade800,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Poppins',
+                    ),
+                  ),
+                ),
+                SizedBox(
                   child: _boards.isEmpty
                       ? Center(
                           child: Text(
@@ -43,7 +57,7 @@ class _HomePageState extends State<HomePage> {
               : Padding(
                   padding: const EdgeInsets.symmetric(vertical: 12.0),
                   child: SizedBox(
-                    height: 100,
+                    height: 300,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: _boards.length,
@@ -62,10 +76,12 @@ class _HomePageState extends State<HomePage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
+
+                                
                                 
                                 // Immagine con clipping per angoli arrotondati
                                 SizedBox(
-                                  height: 120,
+                                  height: 150,
                                   child: board.urlImmagine.isNotEmpty
                                       ? Image.network(
                                           board.urlImmagine,
@@ -173,8 +189,13 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-                ),
+                ),  
+                FooterSection(),
+
+              
+                
               ],
+          ),
           ),
     );
   }
