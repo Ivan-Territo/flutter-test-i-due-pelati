@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../utils/responsive.dart';
 
 class NavigationBarCustom extends StatelessWidget {
   const NavigationBarCustom({super.key});
@@ -7,21 +8,29 @@ class NavigationBarCustom extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(20),
-      margin: EdgeInsets.symmetric(vertical: 0, horizontal: 50.0),
+      margin: EdgeInsets.symmetric(
+        vertical: 0,
+        horizontal: Responsive.isMobile(context) ? 16.0 : 50.0,
+      ),
       decoration: BoxDecoration(color: const Color.fromARGB(255, 0, 111, 83)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text('Surf Board Shop', style: TextStyle(
-            color: const Color.fromARGB(255, 255, 255, 255), 
-            fontSize: 20,
-            fontFamily: 'Poppins',
+          Text(
+            'Surf Board Shop',
+            style: TextStyle(
+              color: const Color.fromARGB(255, 255, 255, 255),
+              fontSize: Responsive.isMobile(context) ? 16 : 20,
+              fontFamily: 'Poppins',
             ),
-            ),
-          ElevatedButton(onPressed: () {
-            // Example action for the button
-            print('Button pressed');
-          }, child: Text('Contact Us')),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              // Example action for the button
+              print('Button pressed');
+            },
+            child: Text('Contact Us'),
+          ),
         ],
       ),
     );
