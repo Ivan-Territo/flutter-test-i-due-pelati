@@ -12,20 +12,16 @@ class NavigationBarCustom extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            'SurfBoardShop',
-            style: TextStyle(
-              color: const Color.fromARGB(255, 255, 255, 255),
-              fontSize: 20,
+          Text('Surf Board Shop', style: TextStyle(
+            color: const Color.fromARGB(255, 255, 255, 255), 
+            fontSize: 20,
+            fontFamily: 'Poppins',
             ),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              // Example action for the button
-              print('Button pressed');
-            },
-            child: Text('Contact Us'),
-          ),
+            ),
+          ElevatedButton(onPressed: () {
+            // Example action for the button
+            print('Button pressed');
+          }, child: Text('Contact Us')),
         ],
       ),
     );

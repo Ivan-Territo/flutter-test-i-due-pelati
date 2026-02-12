@@ -33,5 +33,10 @@ flutter:
         - asset: assets/fonts/Poppins-Bold.ttf
           weight: 700
 
+    - family: Surfbars
+      fonts:
+        - asset: assets/fonts/Surfbars.otf
+          weight: 700
+
     
 
