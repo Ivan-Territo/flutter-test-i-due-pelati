@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_login_profile_lesson/pages/hero_section_page.dart';
 import '../models/board.dart';
 import '../services/api_service.dart';
+import 'navigation_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -23,20 +25,25 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Home')),
+      //appBar: AppBar(),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
-          : _boards.isEmpty
-              ? Center(
-                  child: Text(
-                    'Nessuna board trovata',
-                    style: TextStyle(color: Colors.grey.shade600),
+          : Column(
+              children: [
+                NavigationBarCustom(),
+                HeroSection(),
+                Expanded(
+                  child: _boards.isEmpty
+                      ? Center(
+                          child: Text(
+                            'Nessuna board trovata',
+                            style: TextStyle(color: Colors.grey.shade600),
                   ),
                 )
               : Padding(
                   padding: const EdgeInsets.symmetric(vertical: 12.0),
                   child: SizedBox(
-                    height: 335, // Altezza fissa per le card
+                    height: 100,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: _boards.length,
@@ -44,6 +51,7 @@ class _HomePageState extends State<HomePage> {
                       itemBuilder: (context, index) {
                         final board = _boards[index];
                         return Container(
+                  
                           width: 200,
                           margin: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: Card(
@@ -56,7 +64,8 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 
                                 // Immagine con clipping per angoli arrotondati
-                                Expanded(
+                                SizedBox(
+                                  height: 120,
                                   child: board.urlImmagine.isNotEmpty
                                       ? Image.network(
                                           board.urlImmagine,
@@ -164,6 +173,9 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
+                ),
+              ],
+          ),
     );
   }
 
