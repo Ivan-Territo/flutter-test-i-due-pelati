@@ -22,12 +22,12 @@ class HeroSection extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,           
               children:  [
                 Text(
-                  'SURF\nBOARD\nSHOP',
+                  'Discover the board\nthat matches your style',
                   style: TextStyle(
-                    fontSize: 50,
+                    fontSize: 45,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
-                    fontFamily: 'Poppins',
+                    fontFamily: 'Surfbars',
 
                   ),
                 ),

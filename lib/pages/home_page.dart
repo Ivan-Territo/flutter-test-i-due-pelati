@@ -6,14 +6,19 @@ import 'hero_section_page.dart';
 import 'footer_page.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  
+   HomePage({super.key});
+
+  
 
   @override
   _HomePageState createState() => _HomePageState();
+   
 }
 
 class _HomePageState extends State<HomePage> {
   final ApiService _apiService = ApiService();
+  final ScrollController _scrollController = ScrollController();
   List<Board> _boards = [];
   bool _isLoading = true;
 
@@ -22,6 +27,13 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     _fetchBoards();
   }
+
+    @override
+  void dispose() {
+  _scrollController.dispose();
+  super.dispose();
+}
+
   
   @override
   Widget build(BuildContext context) {
@@ -59,6 +71,7 @@ class _HomePageState extends State<HomePage> {
                   child: SizedBox(
                     height: 300,
                     child: ListView.builder(
+                      controller: _scrollController,
                       scrollDirection: Axis.horizontal,
                       itemCount: _boards.length,
                       padding: const EdgeInsets.symmetric(horizontal: 12.0),
@@ -189,7 +202,90 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-                ),  
+                ), 
+
+                Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Freccia sinistra
+                  IconButton(
+                    icon: const Icon(Icons.arrow_back_ios),
+                    onPressed: () {
+                      _scrollController.animateTo(
+                        _scrollController.offset - 250, // distanza scroll
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeOut,
+                      );
+                    },
+                  ),
+
+                  const SizedBox(width: 20),
+
+                  // Freccia destra
+                  IconButton(
+                    icon: const Icon(Icons.arrow_forward_ios),
+                    onPressed: () {
+                      _scrollController.animateTo(
+                        _scrollController.offset + 250, // distanza scroll
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeOut,
+                      );
+                    },
+                  ),
+                ],
+              ),
+
+SizedBox(height: 24),
+                
+                Stack(
+                    children: [
+                      // Sfondo grigio
+                      Container(
+                       
+                      ),
+
+                      // Immagine centrata
+                      SizedBox(
+                        width: double.infinity,
+                        child: Image.asset(
+                          'assets/images/surf.jpg',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+
+                      // Testo sovrapposto
+                      const Positioned(
+                        bottom: 20, // distanza dal fondo (puoi modificarla)
+                        left: 20,   // distanza dal lato sinistro
+                        child: Text(
+                          "Feel the freedom \nof the sea",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 45,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Poppins',
+                            shadows: [
+                              Shadow(
+                                blurRadius: 8,
+                                color: Colors.black54,
+                                offset: Offset(2, 2),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                /*Center(
+                  
+                  child: Image.asset(
+                    'assets/images/surf.jpg',
+                    
+                    fit: BoxFit.cover,
+                  ),
+                ),*/ 
+                SizedBox(height: 24),
                 FooterSection(),
 
               
